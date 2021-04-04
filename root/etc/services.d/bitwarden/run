@@ -11,5 +11,5 @@ redirect_cmd() {
 cd / || exit
 
 echo "Starting Bitwarden."
-s6-setuidgid abc \
+redirect_cmd s6-setuidgid abc \
 	bitwarden_rs

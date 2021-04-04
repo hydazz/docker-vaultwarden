@@ -24,7 +24,7 @@ LABEL maintainer="hydaz"
 
 # environment settings
 ENV ROCKET_ENV="staging" \
-	ROCKET_PORT="80" \
+	ROCKET_PORT="8080" \
 	ROCKET_WORKERS="10" \
 	SSL_CERT_DIR="/etc/ssl/certs" \
 	DATA_FOLDER="/config"
