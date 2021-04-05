@@ -27,7 +27,8 @@ ENV ROCKET_ENV="staging" \
 	ROCKET_PORT="8080" \
 	ROCKET_WORKERS="10" \
 	SSL_CERT_DIR="/etc/ssl/certs" \
-	DATA_FOLDER="/config"
+	DATA_FOLDER="/config" \
+	LOG_FILE="/config/log/bitwarden.log"
 
 RUN set -xe && \
 	echo "**** install runtime packages ****" && \
@@ -46,5 +47,5 @@ COPY --from=builder /out /
 COPY root/ /
 
 # ports and volumes
-EXPOSE 80 3012
+EXPOSE 8080 3012
 VOLUME /config
