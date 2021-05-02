@@ -1,11 +1,11 @@
 # environment settings
 ARG VERSION
 
-FROM bitwardenrs/server:${VERSION}-alpine as builder
+FROM vaultwarden/server:${VERSION}-alpine as builder
 
 RUN set -xe && \
 	mkdir -p /out/usr/bin && \
-	mv /bitwarden_rs /out/usr/bin && \
+	mv /vaultwarden /out/usr/bin && \
 	mv \
 		/Rocket.toml \
 		/web-vault \
@@ -35,8 +35,7 @@ RUN set -xe && \
 	apk add --no-cache \
 		curl \
 		openssl \
-		postgresql-libs \
-		sqlite && \
+		postgresql-libs && \
 	echo "**** cleanup ****" && \
 	rm -rf \
 		/tmp/*

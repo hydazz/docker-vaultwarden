@@ -4,7 +4,7 @@
 
 **This is an unofficial image that has been modified for my own needs. If my needs match your needs, feel free to use this image at your own risk.**
 
-Fork of [dani-garcia/bitwarden_rs](https://github.com/dani-garcia/bitwarden_rs/)
+Fork of [dani-garcia/vaultwarden](https://github.com/dani-garcia/vaultwarden/)
 
 [Bitwarden](https://bitwarden.com/) is an open source password management solutions for individuals, teams, and business organizations.
 
@@ -31,11 +31,11 @@ docker run -d \
 | ------- | -------------------------------------------------------------------------------------------------------- | ------------- |
 | `DEBUG` | set `true` to display errors in the Docker logs. When set to `false` the Docker log is completely muted. | `false`       |
 
-**See other variables on the official [wiki](https://github.com/dani-garcia/bitwarden_rs/wiki/)**
+**See other variables on the official [wiki](https://github.com/dani-garcia/vaultwarden/wiki/)**
 
 ## Upgrading Bitwarden
 
-To upgrade, all you have to do is pull the latest Docker image. We automatically check for Bitwarden [(bitwarden_rs)](https://github.com/dani-garcia/bitwarden_rs/) updates daily. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
+To upgrade, all you have to do is pull the latest Docker image. We automatically check for Bitwarden [(vaultwarden)](https://github.com/dani-garcia/vaultwarden/) updates daily. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
 
 ## Fixing Appdata Permissions
 
