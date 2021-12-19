@@ -1,15 +1,7 @@
 #!/usr/bin/with-contenv bash
 
-redirect_cmd() {
-	if [[ "${DEBUG}" == "true" ]]; then
-		"$@"
-	else
-		"$@" >/dev/null 2>&1
-	fi
-}
-
 cd / || exit
 
 echo "Starting Bitwarden."
-redirect_cmd s6-setuidgid abc \
+redirect_cmd exec s6-setuidgid abc \
 	vaultwarden
