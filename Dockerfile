@@ -7,7 +7,6 @@ RUN set -xe && \
 	mkdir -p /out/usr/bin && \
 	mv /vaultwarden /out/usr/bin && \
 	mv \
-		/Rocket.toml \
 		/web-vault \
 		/out
 
