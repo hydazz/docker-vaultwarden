@@ -43,7 +43,7 @@ jobs:
             --platform=linux/amd64 \
             --output "type=docker" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
-            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-bitwarden/releases/latest" | jq -r '.tag_name') \
+            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-vaultwarden/releases/latest" | jq -r '.tag_name') \
             --tag vcxpz/ci-build:ci-build \
             --file Dockerfile .
 
@@ -59,9 +59,9 @@ jobs:
             --platform=linux/amd64 \
             --output "type=image,push=true" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
-            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-bitwarden/releases/latest" | jq -r '.tag_name') \
-            --tag vcxpz/bitwarden:latest \
-            --tag vcxpz/bitwarden:$(curl -sL "https://api.github.com/repos/hydazz/docker-bitwarden/releases/latest" | jq -r '.tag_name') \
+            --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-vaultwarden/releases/latest" | jq -r '.tag_name') \
+            --tag vcxpz/vaultwarden:latest \
+            --tag vcxpz/vaultwarden:$(curl -sL "https://api.github.com/repos/hydazz/docker-vaultwarden/releases/latest" | jq -r '.tag_name') \
             --file Dockerfile .
 
       - name: Get New Package Versions From Image
@@ -80,5 +80,5 @@ jobs:
         with:
           username: vcxpz
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: vcxpz/bitwarden
+          repository: vcxpz/vaultwarden
 

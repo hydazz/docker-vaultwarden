@@ -2,6 +2,6 @@
 
 cd / || exit
 
-echo "Starting Bitwarden."
+echo "Starting Vaultwarden."
 redirect_cmd exec s6-setuidgid abc \
 	vaultwarden

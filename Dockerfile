@@ -18,7 +18,7 @@ FROM vcxpz/baseimage-alpine:latest
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Bitwarden version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL build_version="Vaultwarden version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
@@ -27,7 +27,7 @@ ENV ROCKET_ENV="staging" \
 	ROCKET_WORKERS="10" \
 	SSL_CERT_DIR="/etc/ssl/certs" \
 	DATA_FOLDER="/config" \
-	LOG_FILE="/config/log/bitwarden.log"
+	LOG_FILE="/config/log/vaultwarden.log"
 
 RUN set -xe && \
 	echo "**** install runtime packages ****" && \

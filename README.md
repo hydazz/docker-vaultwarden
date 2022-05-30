@@ -1,18 +1,18 @@
-## docker-bitwarden
+## docker-vaultwarden
 
-[![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/bitwarden) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/bitwarden?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-bitwarden/actions?query=workflow%3A"Auto+Builder+CI")
+[![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/vaultwarden) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/vaultwarden?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-vaultwarden/actions?query=workflow%3A"Auto+Builder+CI")
 
 **This is an unofficial image that has been modified for my own needs. If my needs match your needs, feel free to use this image at your own risk.**
 
 Fork of [dani-garcia/vaultwarden](https://github.com/dani-garcia/vaultwarden/)
 
-[Bitwarden](https://bitwarden.com/) is an open source password management solutions for individuals, teams, and business organizations.
+[vaultwarden](https://vaultwarden.com/) is an open source password management solutions for individuals, teams, and business organizations.
 
 ## Usage
 
 ```bash
 docker run -d \
-  --name=bitwarden \
+  --name=vaultwarden \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Australia/Melbourne \
@@ -20,10 +20,10 @@ docker run -d \
   -p 3012:3012 \
   -v <path to appdata>:/config \
   --restart unless-stopped \
-  vcxpz/bitwarden
+  vcxpz/vaultwarden
 ```
 
-[![template](https://img.shields.io/badge/unraid_template-ff8c2f?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-templates/blob/main/hydaz/bitwarden.xml)
+[![template](https://img.shields.io/badge/unraid_template-ff8c2f?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-templates/blob/main/hydaz/vaultwarden.xml)
 
 ## New Environment Variables
 
@@ -33,9 +33,9 @@ docker run -d \
 
 **See other variables on the official [wiki](https://github.com/dani-garcia/vaultwarden/wiki/)**
 
-## Upgrading Bitwarden
+## Upgrading vaultwarden
 
-To upgrade, all you have to do is pull the latest Docker image. We automatically check for Bitwarden [(vaultwarden)](https://github.com/dani-garcia/vaultwarden/) updates daily. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
+To upgrade, all you have to do is pull the latest Docker image. We automatically check for vaultwarden [(vaultwarden)](https://github.com/dani-garcia/vaultwarden/) updates daily. When a new version is released, we build and publish an image both as a version tag and on `:latest`.
 
 ## Fixing Appdata Permissions
 
