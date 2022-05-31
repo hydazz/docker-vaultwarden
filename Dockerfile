@@ -1,17 +1,41 @@
 # environment settings
-ARG VERSION
+FROM vaultwarden/web-vault@sha256:df7f12b1e22bf0dfc1b6b6f46921b4e9e649561931ba65357c1eb1963514b3b5 as vault
 
-FROM vaultwarden/server:${VERSION}-alpine as builder
+FROM blackdex/rust-musl:x86_64-musl-stable-1.61.0 as builder
 
-RUN set -xe && \
-	mkdir -p /out/usr/bin && \
-	mv /vaultwarden /out/usr/bin && \
-	mv \
-		/web-vault \
-		/out
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    TZ=UTC \
+    TERM=xterm-256color \
+    CARGO_HOME="/root/.cargo" \
+    USER="root"
+
+RUN mkdir -pv "${CARGO_HOME}" \
+    && rustup set profile minimal
+
+RUN USER=root cargo new --bin /app
+WORKDIR /app
+
+COPY ./Cargo.* ./
+COPY ./rust-toolchain ./rust-toolchain
+COPY ./build.rs ./build.rs
+
+RUN rustup target add x86_64-unknown-linux-musl
+
+ARG DB=sqlite,mysql,postgresql,enable_mimalloc
+
+RUN cargo build --features ${DB} --release --target=x86_64-unknown-linux-musl \
+    && find . -not -path "./target*" -delete
+
+COPY . .
+
+RUN touch src/main.rs
+
+RUN cargo build --features ${DB} --release --target=x86_64-unknown-linux-musl
+
+RUN touch /vaultwarden_docker_persistent_volume_check
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # runtime stage
 FROM vcxpz/baseimage-alpine:latest
 
@@ -22,9 +46,9 @@ LABEL build_version="Vaultwarden version:- ${VERSION} Build-date:- ${BUILD_DATE}
 LABEL maintainer="hydaz"
 
 # environment settings
-ENV ROCKET_ENV="staging" \
-	ROCKET_PORT="8080" \
-	ROCKET_WORKERS="10" \
+ENV ROCKET_PROFILE="release" \
+	ROCKET_PORT="80" \
+	ROCKET_ADDRESS="0.0.0.0" \
 	SSL_CERT_DIR="/etc/ssl/certs" \
 	DATA_FOLDER="/config" \
 	LOG_FILE="/config/log/vaultwarden.log"
@@ -38,11 +62,13 @@ RUN set -xe && \
 	rm -rf \
 		/tmp/*
 
-COPY --from=builder /out /
+COPY --from=vault /web-vault ./web-vault
+COPY --from=builder /vaultwarden_docker_persistent_volume_check /data/vaultwarden_docker_persistent_volume_check
+COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/vaultwarden .
 
 # add local files
 COPY root/ /
 
 # ports and volumes
-EXPOSE 8080 3012
+EXPOSE 80 3012
 VOLUME /config
